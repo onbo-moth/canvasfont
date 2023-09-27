@@ -71,8 +71,6 @@ class CanvasFont {
    */
   compileFont(){
     this.context.font = `${this.fontStyle} ${this.fontSize}px ${this.fontFamily}`
-
-    this.dirtyFont = false
   }
 
   /**
