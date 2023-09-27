@@ -2,12 +2,6 @@
  * Creates a easy font API for canvas.
  */
 class CanvasFont {
-  static FontAttributes = {
-    Size:   Symbol("FontSize"),
-    Family: Symbol("FontFamily"),
-    Style:  Symbol("FontStyle"),
-  }
-
   static FontAnchors = {
     TopLeft:      Symbol("AnchorTopLeft"),
     TopCenter:    Symbol("AnchorTopCenter"),
@@ -34,56 +28,42 @@ class CanvasFont {
     // It is best to use top baseline, since it's easier to calculate positions and follows the common canvas system.
     this.context.textBaseline = "top"
 
-    this.fontSize   = 12
-    this.fontFamily = "sans-serif"
-    this.fontStyle  = "normal"
-
-    this.autoCompile = true
-    this.dirtyFont   = false
+    this._fontSize   = 12
+    this._fontFamily = "sans-serif"
+    this._fontStyle  = "normal"
   }
 
-  /**
-   * Sets a font attribute.
-   * 
-   * @param { Symbol } attribute 
-   * @param { Number | String } value 
-   */
-  setAttribute( attribute, value ){
-    switch( attribute ){
-      case CanvasFont.FontAttributes.Size: {
-        this.fontSize = value
-        break;
-      }
-
-      case CanvasFont.FontAttributes.Family: {
-        this.fontFamily = value
-        break;
-      }
-
-      case CanvasFont.FontAttributes.Style: {
-        this.fontStyle = value
-        break;
-      }
-
-      default: {
-        console.warn( "Attribute not found; got " + attribute )
-      }
-    }
-
-    if( this.autoCompile ) this.compileFont()
-    else this.dirtyFont = true
+  get fontSize() {
+    return this._fontSize
   }
 
-  /**
-   * Sets auto compile flag.
-   * Auto compilation makes sure when a attribute is set, the font attribute of 2d context is always up.
-   * @param { Boolean } value 
-   * @returns 
-   */
-  setAutoCompile( value ){
-    if( typeof value != "boolean" ) return
+  set fontSize( value ) {
+    if( typeof value != "number" ) return
 
-    this.autoCompile = value
+    this._fontSize = value
+    this.compileFont()
+  }
+
+  get fontFamily() {
+    return this._fontFamily
+  }
+
+  set fontFamily( value ) {
+    if( typeof value != "string" ) return
+
+    this._fontFamily = value
+    this.compileFont()
+  }
+
+  get fontStyle() {
+    return this._fontStyle
+  }
+
+  set fontStyle( value ) {
+    if( typeof value != "string" ) return
+
+    this._fontStyle = value
+    this.compileFont()
   }
 
   /**
@@ -231,13 +211,6 @@ class CanvasFont {
     this.context.strokeText( text, drawX, drawY )
 
     return true
-  }
-
-  /**
-   * Warns the developer if font attributes were modified without compiling the font.
-   */
-  dirtyFontCheck(){
-    if( this.dirtyFont ) console.warn( "Font attributes are dirty. Maybe forgot to manually compile?" )
   }
 }
 
