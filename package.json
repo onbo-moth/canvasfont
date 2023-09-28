@@ -1,6 +1,6 @@
 {
   "name": "@onbo/canvasfont",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "An easy API for drawing text in HTML Canvas in 2d context.",
   "main": "main.js",
   "scripts": {
