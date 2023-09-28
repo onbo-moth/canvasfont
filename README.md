@@ -55,3 +55,7 @@ font.fillText( 150, 150, "BottomRight", CanvasFont.fontAnchors.BottomRight );
 ```
 
 Demo of all anchors found in `demo/` folder.
+
+## Build
+
+Simply use webpack to make a bundle for web use.
