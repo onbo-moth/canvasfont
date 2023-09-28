@@ -179,8 +179,6 @@ class CanvasFont {
    * @returns { Boolean } if text has been drawn.
    */
   fillText( x, y, text, anchor = this.FontAnchors.TopLeft ){
-    this.dirtyFontCheck()
-
     let { drawX, drawY } = this.getDrawPosition( x, y, text, anchor )
     
     if( ! this.isWithinCanvas( drawX, drawY ) ) return false
@@ -200,8 +198,6 @@ class CanvasFont {
    * @returns { Boolean } if text has been drawn.
    */
   strokeText( x, y, text, anchor = this.FontAnchors.TopLeft ){
-    this.dirtyFontCheck()
-
     let { drawX, drawY } = this.getDrawPosition( x, y, text, anchor )
     
     if( ! this.isWithinCanvas( drawX, drawY ) ) return false
